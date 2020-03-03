@@ -1,0 +1,41 @@
+body{
+	font-family: ariel, sans-serif;
+	background-color: #21272B;
+	display: flex;
+	flex-wrap: wrap;
+}
+h1{
+	color: #ffffff;
+	width: 100%;
+}
+section, h1{
+	margin: 0px 1% 50px 1%;
+}
+section{
+	background-color: #F2F2F2;
+	border-radius: 20px;
+	padding: 2%;
+}
+#chart1, #chart2{
+	width: 400px;
+	height: auto;
+}
+
+
+@media only screen and (max-width: 930px){
+	body{
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
+}
+@media only screen and (max-width: 450px){
+	#chart1, #chart2{
+		width: 300px;
+	}
+}
+
+@media only screen and (max-width: 330px){
+	#chart1, #chart2{
+		width: 250px;
+	}
+}

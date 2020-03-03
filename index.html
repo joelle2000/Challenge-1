@@ -1,9 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>challenge 1</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+	<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+	<title>spaceX travelers program</title>
 </head>
 <body>
+
+	<h1>SpaceX dashboard</h1>
+
+	<section>
+		<h2>The distance in miles traveled over the past five hours</h2>
+		<div class="ct-chart ct-perfect-fifth" id="chart1">		</div>
+		<script>
+			//this is the line chart
+			new Chartist.Line('#chart1', {
+				//X-axis
+				labels: ['1st hr', '2nd hr', '3rd hr', '4th hr', '5th hr'],
+				//Y-axis
+			  	series: [
+			    	[10, 20, 30, 20, 40],
+			  	]
+			}, 
+			{
+			//how high the Y-axis is and if the line should end at the beginning of the last collumn
+			  high: 50,
+			  fullWidth: false,
+			  // this is so the axis have round numbers 
+			  axisY: {
+			    onlyInteger: true,
+			    labelInterpolationFnc: function(value) {
+				    	return (value / 1) + 'mi';
+				    }
+			  	}
+			});
+			new Chartist.Line('.ct-chart', data);
+		</script>
+	</section>
+
+	<section>
+		<h2>The amount of fuel that's left</h2>
+
+		<div class="ct-chart ct-perfect-fifth" id="chart2"></div>
+
+		<script>
+			//this is the bar chart
+			new Chartist.Bar('#chart2', {
+				//X-axis
+				labels: ['fuel'],
+				//Y-axis
+				series: [
+					[54]
+				]
+			}, {
+				//how high the chart should be
+				high: 100,
+				//this will give the Y-axis roundnumbers and a %-symbol
+				axisY: {
+					onlyInteger: true,  
+				    labelInterpolationFnc: function(value) {
+				    	return (value / 1) + '\u0025';
+				    }
+				}
+			}).on('draw', function(data) {
+				if(data.type === 'bar') {
+					data.element.attr({
+				      	style: 'stroke-width: 30px'
+				    });
+				}
+			});
+		</script>
+	</section>
+
+	<section>
+		<h2>The estimated time left until arrival</h2>
+		<p id="count-down"></p>
+
+			<script>
+				// this is the date the clock is counting down to
+				var countDownDate = new Date("Nov 18, 2020 13:00:00").getTime();
+
+				// update the count down every 1 second
+				var x = setInterval(function() {
+
+					// gets today's date and time
+					var now = new Date().getTime();
+					    
+					// finds the time difference between now and the count down date
+					var distance = countDownDate - now;
+					    
+					// these are the time calculations for days, hours, minutes and seconds
+					var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+					    
+					// this shows the count down clock at the paragraph woth the id count-down 
+					document.getElementById("count-down").innerHTML = days + "d " + hours + "h "
+					  + minutes + "m " + seconds + "s ";
+					    
+					// when the count-down is over they shoul have arrived and it will display the text You arrived
+					if (distance < 0) {
+						clearInterval(x);
+						document.getElementById("demo").innerHTML = "You arrived";
+					}
+				}, 1000);
+			</script>
+	</section>
+
+	
+
 
 </body>
 </html>
